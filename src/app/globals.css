@@ -118,3 +118,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .glass {
+    @apply backdrop-blur-3xl
+      bg-black/10
+      border border-white/20
+      ring-1 ring-black/30
+      shadow-[0_8px_32px_0_rgba(31,38,135,0.37)];
+  }
+}
