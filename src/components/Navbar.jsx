@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav
       className="fixed top-0 left-0 w-full z-[999]
                  bg-black/30 backdrop-blur-2xl border-b border-white/20
-                 text-white shadow-lg"
+                 text-white shadow-lg py-2"
     >
       <div className="px-6 py-4 flex items-center justify-between">
         {/* Logo */}
@@ -24,8 +24,8 @@ const Navbar = () => {
           <Link href="/about" className="hover:text-violet-400 transition">
             About
           </Link>
-          <Link href="/projects" className="hover:text-violet-400 transition">
-            Projects
+          <Link href="/skills" className="hover:text-violet-400 transition">
+            Skills
           </Link>
         </div>
       </div>

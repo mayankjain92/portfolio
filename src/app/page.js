@@ -5,6 +5,7 @@ import Background from "../components/Background";
 import GlassSocialIcons from "../components/GlassSocialIcons";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaXTwitter, FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa6";
+import { ArrowUpRight } from "lucide-react";
 
 const page = () => {
   return (
@@ -47,7 +48,7 @@ const page = () => {
             size={60}
           />
         </div>
-        <div className="px-12 py-10 w-[1000px] rounded-3xl bg-black/10 border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] backdrop-blur-3xl ring-1 ring-black/30 flex flex-row text-white text-xl font-bold">
+        <div className=" px-12 py-10 w-[1000px] rounded-3xl glass flex flex-row text-white text-xl font-bold">
           <div className="w-2/3">
             Hi, I'm Mayank Jain, a passionate frontend developer currently
             pursuing my B.Tech in Computer Science Engineering at JECRC
@@ -58,21 +59,31 @@ const page = () => {
             build impactful projects that combine creativity and technology.
             <div className="flex flex-row mt-10 gap-5">
               <button
-                className="glass py-0.5 px-3 rounded-xl text-center text-lg bg-violet-500/15 border-violet-400/40 hover:border-violet-400/70 hover:bg-white/10
-      transition-all duration-200
-      cursor-pointer"
+                onClick={() =>
+                  window.open(
+                    "https://drive.google.com/file/d/1HwNKi7D22l_uVBZGcTOQDhk4qkgKS7NO/view?usp=drive_link",
+                    "_blank",
+                  )
+                }
+                className="py-1.5 px-4 rounded-xl inline-flex items-center gap-1
+             bg-violet-800 hover:bg-violet-600/90
+             border border-violet-400/40
+             transition-all duration-200 cursor-pointer"
               >
-                Resume
+                <span>Resume</span>
+
+                <ArrowUpRight className="w-4 h-4" />
               </button>
-              <button
-                className="glass py-0.5 px-3 rounded-xl text-center text-lg bg-violet-500/15 border-violet-400/40
-      hover:border-violet-400/70
-      hover:bg-white/10
-      transition-all duration-200
-      cursor-pointer"
+              <a
+                href="mailto:mayankjain96725@gmail.com"
+                className="glass py-0.5 px-3 rounded-xl inline-flex items-center gap-1
+             text-center text-lg bg-violet-500/15 border-violet-400/40
+             hover:border-violet-400/70 hover:bg-white/10
+             transition-all duration-200 cursor-pointer"
               >
-                Send Mail
-              </button>
+                <MdOutlineEmail className="w-4 h-4" />
+                <span>Send Mail</span>
+              </a>
             </div>
           </div>
           <div className="h-55 w-1/4 rounded-2xl ">

@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <Background />
         {/* Page content */}
-        <main className="relative z-10">{children}</main>
+        <main className="relative z-10 pt-20">{children}</main>
       </body>
     </html>
   );
