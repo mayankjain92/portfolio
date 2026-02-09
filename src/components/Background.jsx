@@ -4,7 +4,7 @@ import DarkVeil from "./DarkVeil";
 
 const Background = () => {
   return (
-    <div className="w-full h-screen">
+    <div className="fixed inset-0 -z-10 overflow-hidden">
       <DarkVeil />
     </div>
   );
