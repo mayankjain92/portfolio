@@ -22,7 +22,7 @@ const page = () => {
         {/* Header */}
         <div className="mb-10">
           <h1 className="text-5xl font-bold">Skills & Tools</h1>
-          <h2 className="text-3xl text-gray-400 mt-2">
+          <h2 className="text-3xl text-gray-400 mt-2 font-bold">
             Built by learning, breaking, fixing, and building again.
           </h2>
         </div>

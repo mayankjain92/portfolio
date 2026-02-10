@@ -3,7 +3,7 @@ import React from "react";
 const page = () => {
   return (
     <section className="h-full flex items-center justify-center py-5">
-      <div className="px-12 py-10 w-[1200px] rounded-3xl glass flex flex-col text-white text-xl">
+      <div className="px-12 py-10 w-[1200px] rounded-3xl glass flex flex-col text-white text-lg">
         <div className="mb-10 font-bold">
           <h1 className="text-5xl">About Me</h1>
           <h2 className="text-4xl text-gray-400">
@@ -30,6 +30,44 @@ const page = () => {
           collaboration. My goal is to become a well-rounded software engineer
           and contribute to meaningful products that create real impact.
         </p>
+        <div className="flex flex-wrap gap-3">
+          <span
+            className="px-4 py-1.5 rounded-xl bg-white/10 border border-white/20 text-sm transition-all duration-200 ease-out
+    hover:scale-105"
+          >
+            Problem Solver
+          </span>
+          <span
+            className="px-4 py-1.5 rounded-xl bg-white/10 border border-white/20 text-sm transition-all duration-200 ease-out
+    hover:scale-105"
+          >
+            Collaborative
+          </span>
+          <span
+            className="px-4 py-1.5 rounded-xl bg-white/10 border border-white/20 text-sm transition-all duration-200 ease-out
+    hover:scale-105"
+          >
+            Quick Learner
+          </span>
+          <span
+            className="px-4 py-1.5 rounded-xl bg-white/10 border border-white/20 text-sm transition-all duration-200 ease-out
+    hover:scale-105"
+          >
+            UI-Focused
+          </span>
+        </div>
+        <div className="text-white pt-10 flex gap-5">
+          <span className="text-2xl font-bold">Ready to work together?</span>
+          <button
+            className="py-0.5 px-4 rounded-xl inline-flex items-center gap-1
+             bg-violet-800 hover:bg-violet-600/90
+             border border-violet-400/40
+             transition-all duration-200 cursor-pointe transition-all duration-200 ease-out
+    hover:scale-105"
+          >
+            <span>Contact</span>
+          </button>
+        </div>
       </div>
     </section>
   );
