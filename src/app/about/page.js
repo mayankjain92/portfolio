@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const page = () => {
   return (
@@ -58,15 +59,16 @@ const page = () => {
         </div>
         <div className="text-white pt-10 flex gap-5">
           <span className="text-2xl font-bold">Ready to work together?</span>
-          <button
-            className="py-0.5 px-4 rounded-xl inline-flex items-center gap-1
-             bg-violet-800 hover:bg-violet-600/90
-             border border-violet-400/40
-             transition-all duration-200 cursor-pointe transition-all duration-200 ease-out
-    hover:scale-105"
-          >
-            <span>Contact</span>
-          </button>
+          <Link href="/contact">
+            <button
+              className="py-0.5 px-4 rounded-xl inline-flex items-center gap-1
+            bg-violet-800 hover:bg-violet-600/90
+            border border-violet-400/40
+            cursor-pointe transition-all duration-200 ease-out hover:scale-105"
+            >
+              <span>Contact</span>
+            </button>
+          </Link>
         </div>
       </div>
     </section>
