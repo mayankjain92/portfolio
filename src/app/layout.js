@@ -10,11 +10,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="relative min-h-screen">
+      <body className="relative min-h-screen scroll-smooth ">
         <Navbar />
         <Background />
         {/* Page content */}
-        <main className="relative z-10 pt-20">{children}</main>
+        <main className="relative z-10 pt-20 ">{children}</main>
       </body>
     </html>
   );

@@ -18,19 +18,19 @@ const Navbar = () => {
 
         {/* Menu */}
         <div className="flex gap-10 text-sm font-medium">
-          <Link href="/" className="hover:text-violet-400 transition">
+          <Link href="/#home" className="hover:text-violet-400 transition">
             Home
           </Link>
-          <Link href="/about" className="hover:text-violet-400 transition">
+          <Link href="/#about" className="hover:text-violet-400 transition">
             About
           </Link>
-          <Link href="/skills" className="hover:text-violet-400 transition">
+          <Link href="/#skills" className="hover:text-violet-400 transition">
             Skills
           </Link>
-          <Link href="/projects" className="hover:text-violet-400 transition">
+          <Link href="/#projects" className="hover:text-violet-400 transition">
             Projects
           </Link>
-          <Link href="/contact" className="hover:text-violet-400 transition">
+          <Link href="/#contact" className="hover:text-violet-400 transition">
             Contact
           </Link>
         </div>

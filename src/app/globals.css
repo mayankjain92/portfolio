@@ -119,6 +119,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer utilities {
   .glass {
     @apply backdrop-blur-3xl

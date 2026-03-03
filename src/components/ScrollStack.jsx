@@ -18,12 +18,12 @@ const ScrollStack = ({
   className = "",
   itemDistance = 100,
   itemScale = 0.03,
-  itemStackDistance = 30,
+  itemStackDistance = 50,
   stackPosition = "20%",
   scaleEndPosition = "10%",
   baseScale = 0.85,
   rotationAmount = 0,
-  blurAmount = 0,
+  blurAmount = 2,
   useWindowScroll = false,
   onStackComplete,
 }) => {
@@ -351,7 +351,7 @@ const ScrollStack = ({
       ref={scrollerRef}
       style={containerStyles}
     >
-      <div className="scroll-stack-inner pt-0 px-20 pb-[50rem] min-h-screen">
+      <div className="scroll-stack-inner pt-0 px-20 pb-[20rem] min-h-screen">
         {children}
         {/* Spacer so the last pin can release cleanly */}
         <div className="scroll-stack-end w-full h-px" />
