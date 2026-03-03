@@ -116,7 +116,7 @@ export default async function ProjectPage({ params }) {
             <p className="text-xs uppercase tracking-widest text-violet-400/60 font-semibold mb-3">
               About this project
             </p>
-            <p className="text-white/70 text-base leading-relaxed">
+            <p className="text-white/70 text-base leading-relaxed whitespace-pre-line">
               {project.longDesc}
             </p>
           </div>
@@ -126,7 +126,7 @@ export default async function ProjectPage({ params }) {
             <p className="text-xs uppercase tracking-widest text-emerald-400/60 font-semibold mb-3">
               What I learned
             </p>
-            <p className="text-white/60 text-sm leading-relaxed">
+            <p className="text-white/70 text-base leading-relaxed whitespace-pre-line">
               {project.learned}
             </p>
           </div>
@@ -134,16 +134,16 @@ export default async function ProjectPage({ params }) {
           {/* Tech stack */}
           <div className="glass rounded-2xl p-7 border border-white/10">
             <p className="text-xs uppercase tracking-widest text-cyan-400/60 font-semibold mb-4">
-              Tech stack
+              Key Features
             </p>
             <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
+              {project.features.map((feature, index) => (
+                <li
+                  key={index}
                   className="text-sm text-white/60 border border-white/10 bg-white/5 px-3 py-1.5 rounded-lg hover:border-violet-400/30 hover:text-violet-300/80 hover:bg-violet-500/10 transition-all duration-200"
                 >
-                  {tag}
-                </span>
+                  {feature}
+                </li>
               ))}
             </div>
           </div>
