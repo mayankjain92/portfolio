@@ -15,6 +15,15 @@ const PROJECTS = [
   },
   {
     idx: "02",
+    projectName: "notesapp-web",
+    title: "NotesApp",
+    desc: "A full-stack CRUD Notes application built using Next.js App Router and MongoDB. Implemented RESTful APIs for creating, updating, deleting, and fetching notes with proper validation and error handling. Designed a responsive and modern UI using Tailwind CSS and managed client-server communication using Axios.",
+    tags: ["Next.js", "MongoDB", "Tailwind CSS", "Axios", "REST API"],
+    Icon: Zap,
+    href: "/projects",
+  },
+  {
+    idx: "03",
     projectName: "portfolio-website",
     title: "Portfolio Website",
     desc: "A modern portfolio built with Next.js and Tailwind CSS, focused on smooth interactions, reusable components, and responsive UI across all devices.",
@@ -23,7 +32,7 @@ const PROJECTS = [
     href: "/projects",
   },
   {
-    idx: "03",
+    idx: "04",
     projectName: "recipe-app",
     title: "Recipe App",
     desc: "An Android recipe application built with Kotlin and Jetpack Compose that fetches real-time recipe data from an online API. Users can browse, search, and explore detailed recipes with ingredients and instructions. The app works over the internet and provides a clean, modern UI experience.",
@@ -79,7 +88,7 @@ const Projects = () => {
                 key={project.idx}
                 itemClassName="glass border border-white/20 text-white"
               >
-                <div className="flex items-start justify-between mb-1">
+                <div className="flex items-start justify-between ">
                   <span className="text-[11px] font-semibold uppercase tracking-widest text-violet-400/60">
                     Project {project.idx}
                   </span>
@@ -106,7 +115,7 @@ const Projects = () => {
                 </div>
 
                 <Link href={`/projects/${project.projectName}`}>
-                  <button className="py-2 px-4 rounded-xl inline-flex items-center gap-1.5 bg-violet-800 hover:bg-violet-600/90 border border-violet-400/40 transition-all duration-200 ease-out cursor-pointer hover:scale-105 my-8 text-sm">
+                  <button className="py-2 px-4 rounded-xl inline-flex items-center gap-1.5 bg-violet-800 hover:bg-violet-600/90 border border-violet-400/40 transition-all duration-200 ease-out cursor-pointer hover:scale-105 my-6 text-sm">
                     Explore Details <ArrowUpRight className="w-4 h-4" />
                   </button>
                 </Link>

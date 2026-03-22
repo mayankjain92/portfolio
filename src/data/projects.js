@@ -50,6 +50,36 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
 
   {
     idx: "02",
+    projectName: "notesapp-web",
+    title: "NotesApp",
+    shortDesc:
+      "A full-stack notes management app built with Next.js and MongoDB.",
+
+    longDesc:
+      "A full-stack CRUD Notes application built using Next.js (App Router), MongoDB, and Tailwind CSS. The application enables users to create, read, update, and delete notes through RESTful APIs with proper validation and error handling. It features a responsive UI, efficient state management using React hooks, and seamless client-server communication via Axios. Designed with a scalable structure to support future enhancements like authentication and advanced features.",
+
+    features: [
+      "Create, read, update, and delete (CRUD) notes",
+      "RESTful API architecture with proper validation",
+      "MongoDB integration using Mongoose",
+      "Dynamic data fetching with Axios",
+      "Responsive UI built with Tailwind CSS",
+      "Edit and update functionality with state-driven UI",
+      "Clean and modular project structure",
+    ],
+
+    tags: ["Next.js", "MongoDB", "Tailwind CSS", "Axios", "REST API"],
+
+    liveUrl: "",
+    githubUrl: "https://github.com/mayankjain92/notesapp.git",
+
+    screenshots: [],
+
+    learned:
+      "Strengthened my understanding of full-stack development, REST API design, database integration with MongoDB, state management in React, and building scalable applications using Next.js App Router.",
+  },
+  {
+    idx: "03",
     projectName: "portfolio-website",
     title: "Portfolio Website",
     shortDesc: "A modern, animated developer portfolio built with Next.js.",
@@ -71,14 +101,14 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
 
     liveUrl: "",
     githubUrl: "https://github.com/mayankjain92/portfolio.git",
-    screenshots: [],
+    screenshots: ["/Images/PortfolioHome.png"],
 
     learned:
       "Improved my understanding of modern React architecture, UI design systems, animation integration, routing patterns, and building scalable frontend applications ready for deployment.",
   },
 
   {
-    idx: "03",
+    idx: "04",
     projectName: "recipe-app",
     title: "Recipe App",
     shortDesc:
