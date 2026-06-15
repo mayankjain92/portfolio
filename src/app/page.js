@@ -70,10 +70,8 @@ const Page = () => {
             size={58}
           />
         </div>
-        {/* ── About card ── */}
         <div className="glass rounded-3xl px-6 py-8 md:px-10 md:py-10 text-white grid grid-cols-1 md:grid-cols-[1.45fr_0.55fr] gap-8 items-center">
           <div>
-            {/* Availability badge */}
             <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full border border-white/20 bg-white/5 text-white/60 mb-5">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block animate-pulse" />
               Available for opportunities
@@ -96,23 +94,19 @@ const Page = () => {
               Learn more about me →
             </a>
 
-            {/* CTA buttons */}
             <div className="flex flex-wrap mt-8 gap-3">
-              <button
-                onClick={() =>
-                  window.open(
-                    "https://drive.google.com/file/d/1Zh5OA4-kovQMCXT6e9TJFIuv7hZaErla/view?usp=sharing",
-                    "_blank", 
-                  )
-                }
-                className="py-2 px-4 rounded-xl inline-flex items-center gap-1.5 bg-violet-800 hover:bg-violet-600/90 border border-violet-400/40 transition-all duration-200 ease-out cursor-pointer hover:scale-105 text-sm"
+              <a
+                href="https://drive.google.com/file/d/1Zh5OA4-kovQMCXT6e9TJFIuv7hZaErla/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-2 px-4 font-bold rounded-xl inline-flex items-center gap-1.5 bg-violet-800 hover:bg-violet-600/90 border border-violet-400/40 transition-all duration-200 ease-out cursor-pointer hover:scale-105 text-sm"
               >
-                View Resume <ArrowUpRight className="w-4 h-4" />
-              </button>
+                View Resume
+              </a>
 
               <a
                 href="mailto:mayankjain96725@gmail.com"
-                className="glass py-2 px-4 rounded-xl inline-flex items-center gap-1.5 text-sm bg-violet-500/15 border-violet-400/40 hover:border-violet-400/70 hover:bg-white/10 cursor-pointer transition-all duration-200 ease-out hover:scale-105"
+                className="glass py-2 font-bold px-4 rounded-xl inline-flex items-center gap-1.5 text-sm bg-violet-500/15 border-violet-400/40 hover:border-violet-400/70 hover:bg-white/10 cursor-pointer transition-all duration-200 ease-out hover:scale-105"
               >
                 <MdOutlineEmail className="w-4 h-4" />
                 <span>Send Mail</span>
@@ -120,7 +114,6 @@ const Page = () => {
             </div>
           </div>
 
-          {/* Photo */}
           <div className="w-full max-w-[240px] md:max-w-none mx-auto">
             <img
               src="/Images/IMG_20260124_224848.jpg.jpeg"
