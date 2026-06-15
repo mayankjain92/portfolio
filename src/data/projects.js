@@ -50,6 +50,36 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
 
   {
     idx: "02",
+    projectName: "realtime-chat",
+    title: "Real-Time Chat Application",
+    shortDesc:
+      "Full-stack real-time chat built with Next.js App Router, Express.js, MongoDB, and Socket.IO with Clerk authentication.",
+
+    longDesc: `A production-grade real-time chat application built using Next.js App Router for the frontend and an Express.js backend using Socket.IO for scalable bidirectional realtime messaging. Authentication and user management are handled via Clerk, with protected frontend routes and backend token verification. The app persists chat history in MongoDB using Mongoose, tracks online presence, implements typing indicators, and syncs users via Clerk webhooks to maintain a canonical user store.
+    Key features include real-time message delivery, presence updates, typing indicators, REST APIs for message history and user management, webhook-driven user synchronization, and robust message persistence with proper indexing for fast chat history retrieval. Designed for both secure authentication flows and high-frequency socket events, the project demonstrates integrating Clerk, Socket.IO, and MongoDB for a seamless real-time experience.`,
+
+    features: [
+      "Realtime messaging with Socket.IO",
+      "Clerk authentication with protected routes and backend token verification",
+      "Webhook-based user synchronization",
+      "Online presence and typing indicators",
+      "Message persistence using MongoDB + Mongoose",
+      "REST APIs for chat history and user management",
+    ],
+
+    tags: ["Next.js", "Express.js", "MongoDB", "Socket.IO", "Clerk"],
+
+    liveUrl: "",
+    githubUrl: "",
+
+    screenshots: [],
+
+    learned:
+      "Integrated realtime WebSocket flows with persistent storage, handled secure token verification for sockets, and designed webhook-driven user sync between Clerk and the app's user database.",
+  },
+
+  {
+    idx: "03",
     projectName: "notesapp-web",
     title: "NotesApp",
     shortDesc:
@@ -78,8 +108,9 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
     learned:
       "Strengthened my understanding of full-stack development, REST API design, database integration with MongoDB, state management in React, and building scalable applications using Next.js App Router.",
   },
+
   {
-    idx: "03",
+    idx: "04",
     projectName: "portfolio-website",
     title: "Portfolio Website",
     shortDesc: "A modern, animated developer portfolio built with Next.js.",
@@ -108,7 +139,7 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
   },
 
   {
-    idx: "04",
+    idx: "05",
     projectName: "recipe-app",
     title: "Recipe App",
     shortDesc:

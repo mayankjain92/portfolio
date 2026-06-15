@@ -15,6 +15,15 @@ const PROJECTS = [
   },
   {
     idx: "02",
+    projectName: "realtime-chat",
+    title: "Real-Time Chat Application",
+    desc: "Full-stack real-time chat built with Next.js App Router, Express.js, MongoDB, and Socket.IO. Includes Clerk authentication, protected routes, backend token verification, webhook user sync, online presence, typing indicators, and live message delivery with persisted chat history.",
+    tags: ["Next.js", "Express.js", "MongoDB", "Socket.IO", "Clerk"],
+    Icon: Code2,
+    href: "/projects",
+  },
+  {
+    idx: "03",
     projectName: "notesapp-web",
     title: "NotesApp",
     desc: "A full-stack CRUD Notes application built using Next.js App Router and MongoDB. Implemented RESTful APIs for creating, updating, deleting, and fetching notes with proper validation and error handling. Designed a responsive and modern UI using Tailwind CSS and managed client-server communication using Axios.",
@@ -23,7 +32,7 @@ const PROJECTS = [
     href: "/projects",
   },
   {
-    idx: "03",
+    idx: "04",
     projectName: "portfolio-website",
     title: "Portfolio Website",
     desc: "A modern portfolio built with Next.js and Tailwind CSS, focused on smooth interactions, reusable components, and responsive UI across all devices.",
@@ -32,7 +41,7 @@ const PROJECTS = [
     href: "/projects",
   },
   {
-    idx: "04",
+    idx: "05",
     projectName: "recipe-app",
     title: "Recipe App",
     desc: "An Android recipe application built with Kotlin and Jetpack Compose that fetches real-time recipe data from an online API. Users can browse, search, and explore detailed recipes with ingredients and instructions. The app works over the internet and provides a clean, modern UI experience.",
