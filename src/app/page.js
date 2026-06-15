@@ -101,8 +101,8 @@ const Page = () => {
               <button
                 onClick={() =>
                   window.open(
-                    "https://drive.google.com/file/d/1HwNKi7D22l_uVBZGcTOQDhk4qkgKS7NO/view?usp=drive_link",
-                    "_blank",
+                    "https://drive.google.com/file/d/1Zh5OA4-kovQMCXT6e9TJFIuv7hZaErla/view?usp=sharing",
+                    "_blank", 
                   )
                 }
                 className="py-2 px-4 rounded-xl inline-flex items-center gap-1.5 bg-violet-800 hover:bg-violet-600/90 border border-violet-400/40 transition-all duration-200 ease-out cursor-pointer hover:scale-105 text-sm"

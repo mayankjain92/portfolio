@@ -130,7 +130,7 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
 
     tags: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
 
-    liveUrl: "",
+    liveUrl: "https://mayankjain-portfolio.vercel.app",
     githubUrl: "https://github.com/mayankjain92/portfolio.git",
     screenshots: ["/Images/PortfolioHome.png"],
 
