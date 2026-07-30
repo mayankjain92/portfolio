@@ -61,15 +61,15 @@ const About = () => {
                       <span className="w-px flex-1 bg-white/8 min-h-[20px]" />
                     </div>
                     <div>
-                      <p className="text-[11px] text-white/30 font-medium mb-0.5">
+                      <p className="text-[11px] text-white/60 font-medium mb-0.5">
                         {item.year}
                       </p>
                       <p
-                        className={`text-sm font-semibold ${item.active ? "text-white" : "text-white/50"}`}
+                        className={`text-sm font-semibold ${item.active ? "text-white" : "text-white/70"}`}
                       >
                         {item.title}
                       </p>
-                      <p className="text-xs text-white/30 mt-0.5">
+                      <p className="text-xs text-white/60 mt-0.5">
                         {item.place}
                       </p>
                     </div>
@@ -104,7 +104,7 @@ const About = () => {
                       <p className="text-sm font-semibold text-white/80">
                         {item.label}
                       </p>
-                      <p className="text-xs text-white/30 mt-0.5">{item.sub}</p>
+                      <p className="text-xs text-white/60 mt-0.5">{item.sub}</p>
                     </div>
                   </div>
                 ))}
@@ -142,7 +142,7 @@ const About = () => {
                     <p className="text-sm font-semibold text-white/80 mt-2">
                       {hobby.label}
                     </p>
-                    <p className="text-xs text-white/35 mt-1 leading-relaxed">
+                    <p className="text-xs text-white/65 mt-1 leading-relaxed">
                       {hobby.desc}
                     </p>
                   </div>

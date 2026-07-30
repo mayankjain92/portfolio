@@ -1,6 +1,53 @@
 export const PROJECTS = [
   {
     idx: "01",
+    projectName: "prep-os",
+    title: "Prep OS",
+    shortDesc:
+      "An end-to-end, high-performance monorepo platform designed for placement preparation, DSA tracking, CS theory mastery, and project organization.",
+
+    longDesc: `Prep OS is a comprehensive, high-performance monorepo platform engineered for computer science students and engineering candidates to organize and accelerate their placement preparation.
+
+The application provides full-lifecycle DSA tracking with topic roadmaps, difficulty filters, an interactive NeetCode 150 checklist, and automated LeetCode profile synchronization. It implements a Redis Cache-Aside architecture with write-through invalidation to sync LeetCode statistics smoothly while honoring API rate limits.
+
+For core CS subjects (OS, DBMS, Computer Networks, OOP), Prep OS utilizes MongoDB aggregation pipelines to compute dynamic completion metrics and subject progress in real time. Designed with Next.js 15 App Router, Express.js, MongoDB, Redis, Docker, and pnpm workspaces, the platform delivers WCAG AA contrast-compliant dark/light themes, 6-month activity heatmaps, and secure JWT authentication with strict tenant isolation.`,
+
+    features: [
+      "DSA Problem Tracker & interactive NeetCode 150 checklist",
+      "LeetCode profile synchronization with Redis Cache-Aside pattern",
+      "MongoDB aggregation pipelines for CS theory progress tracking",
+      "Unified analytics dashboard with 6-month activity heatmaps",
+      "WCAG AA contrast-compliant dark/light design system",
+      "Type-safe shared Zod schemas across frontend & backend",
+      "Docker Compose infrastructure & pnpm monorepo architecture",
+    ],
+
+    tags: [
+      "Next.js 15",
+      "Express.js",
+      "TypeScript",
+      "MongoDB",
+      "Redis",
+      "Docker",
+      "pnpm Monorepo",
+      "Tailwind CSS",
+      "TanStack Query",
+      "Zod",
+    ],
+
+    liveUrl: "https://prep-os-web.vercel.app",
+    githubUrl: "https://github.com/mayankjain92/prep-os.git",
+
+    screenshots: [
+      "/Images/PrepOsDashboard.png",
+      "/Images/PrepOsDSA.png",
+      "/Images/PrepOsCSTheory.png",],
+
+    learned: `Building Prep OS deepened my expertise in scalable full-stack monorepo architecture using pnpm workspaces and shared schema packages (@prep-os/shared). Implementing the Redis Cache-Aside pattern for LeetCode sync taught me how to handle external API rate limits, cache invalidation, and graceful fallback strategies. Optimizing CS theory progress reporting using MongoDB aggregation pipelines significantly improved database query speeds and simplified state management across the dashboard.`,
+  },
+
+  {
+    idx: "02",
     projectName: "mystery-message",
     title: "Mystery Message",
     shortDesc:
@@ -49,7 +96,7 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
   },
 
   {
-    idx: "02",
+    idx: "03",
     projectName: "realtime-chat",
     title: "Real-Time Chat Application",
     shortDesc:
@@ -79,7 +126,7 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
   },
 
   {
-    idx: "03",
+    idx: "04",
     projectName: "notesapp-web",
     title: "NotesApp",
     shortDesc:
@@ -110,7 +157,7 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
   },
 
   {
-    idx: "04",
+    idx: "05",
     projectName: "portfolio-website",
     title: "Portfolio Website",
     shortDesc: "A modern, animated developer portfolio built with Next.js.",
@@ -139,7 +186,7 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
   },
 
   {
-    idx: "05",
+    idx: "06",
     projectName: "recipe-app",
     title: "Recipe App",
     shortDesc:
@@ -168,3 +215,4 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
       "Learned API integration, asynchronous network handling, Compose state management, and structuring a modern Android application using Kotlin best practices.",
   },
 ];
+

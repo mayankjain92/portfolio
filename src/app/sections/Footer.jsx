@@ -12,7 +12,7 @@ const Footer = () => {
             <span className="text-white font-semibold text-sm">
               Mayank Jain
             </span>
-            <span className="text-white/25 text-xs">
+            <span className="text-white/60 text-xs">
               Full Stack Developer · Jaipur, India
             </span>
           </div>
@@ -28,7 +28,7 @@ const Footer = () => {
               <a
                 key={label}
                 href={href}
-                className="text-xs text-white/30 hover:text-white/70 transition-colors duration-150"
+                className="text-xs text-white/70 hover:text-white transition-colors duration-150"
               >
                 {label}
               </a>
@@ -36,7 +36,7 @@ const Footer = () => {
           </div>
 
           {/* copyright */}
-          <span className="text-white/20 text-xs">
+          <span className="text-white/50 text-xs">
             © {new Date().getFullYear()} Mayank Jain
           </span>
         </div>

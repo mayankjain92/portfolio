@@ -3,53 +3,26 @@ import { ArrowUpRight, Code2, Layers, Zap } from "lucide-react";
 import ScrollStack, { ScrollStackItem } from "@/components/ScrollStack";
 import Link from "next/link";
 
-const PROJECTS = [
-  {
-    idx: "01",
-    projectName: "mystery-message",
-    title: "Mystery Message",
-    desc: "Mystery Message allows users to receive honest, anonymous feedback from anyone through a unique profile link — without revealing the sender's identity. Built with a strong focus on privacy, security, and a polished user experience.",
-    tags: ["Nextjs", "MongoDB", "Gemini AI"],
-    Icon: Code2,
-    href: "/projects",
-  },
-  {
-    idx: "02",
-    projectName: "realtime-chat",
-    title: "Real-Time Chat Application",
-    desc: "Full-stack real-time chat built with Next.js App Router, Express.js, MongoDB, and Socket.IO. Includes Clerk authentication, protected routes, backend token verification, webhook user sync, online presence, typing indicators, and live message delivery with persisted chat history.",
-    tags: ["Next.js", "Express.js", "MongoDB", "Socket.IO", "Clerk"],
-    Icon: Code2,
-    href: "/projects",
-  },
-  {
-    idx: "03",
-    projectName: "notesapp-web",
-    title: "NotesApp",
-    desc: "A full-stack CRUD Notes application built using Next.js App Router and MongoDB. Implemented RESTful APIs for creating, updating, deleting, and fetching notes with proper validation and error handling. Designed a responsive and modern UI using Tailwind CSS and managed client-server communication using Axios.",
-    tags: ["Next.js", "MongoDB", "Tailwind CSS", "Axios", "REST API"],
-    Icon: Zap,
-    href: "/projects",
-  },
-  {
-    idx: "04",
-    projectName: "portfolio-website",
-    title: "Portfolio Website",
-    desc: "A modern portfolio built with Next.js and Tailwind CSS, focused on smooth interactions, reusable components, and responsive UI across all devices.",
-    tags: ["Next.js", "Tailwind CSS", "Framer Motion"],
-    Icon: Layers,
-    href: "/projects",
-  },
-  {
-    idx: "05",
-    projectName: "recipe-app",
-    title: "Recipe App",
-    desc: "An Android recipe application built with Kotlin and Jetpack Compose that fetches real-time recipe data from an online API. Users can browse, search, and explore detailed recipes with ingredients and instructions. The app works over the internet and provides a clean, modern UI experience.",
-    tags: ["Kotlin", "Jetpack Compose", "Android Studio", "REST API"],
-    Icon: Zap,
-    href: "/projects",
-  },
-];
+import { PROJECTS } from "@/data/projects";
+
+const getProjectIcon = (projectName) => {
+  switch (projectName) {
+    case "prep-os":
+      return Zap;
+    case "mystery-message":
+      return Code2;
+    case "realtime-chat":
+      return Code2;
+    case "notesapp-web":
+      return Zap;
+    case "portfolio-website":
+      return Layers;
+    case "recipe-app":
+      return Zap;
+    default:
+      return Code2;
+  }
+};
 
 const Projects = () => {
   const [isProjectsHeadingSticky, setIsProjectsHeadingSticky] =
@@ -92,44 +65,47 @@ const Projects = () => {
             scaleEndPosition="15%"
             onStackComplete={() => setIsProjectsHeadingSticky(false)}
           >
-            {PROJECTS.map((project) => (
-              <ScrollStackItem
-                key={project.idx}
-                itemClassName="glass border border-white/20 text-white"
-              >
-                <div className="flex items-start justify-between ">
-                  <span className="text-[11px] font-semibold uppercase tracking-widest text-violet-400/60">
-                    Project {project.idx}
-                  </span>
-                  <div className="w-8 h-8 flex items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/50">
-                    <project.Icon size={15} />
-                  </div>
-                </div>
-
-                <h3 className="text-2xl font-semibold mt-1">{project.title}</h3>
-
-                <p className="mt-3 text-white/75 text-sm leading-relaxed">
-                  {project.desc}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[11px] font-medium px-2.5 py-1 rounded-md border border-white/10 bg-white/5 text-white/45"
-                    >
-                      {tag}
+            {PROJECTS.map((project) => {
+              const Icon = getProjectIcon(project.projectName);
+              return (
+                <ScrollStackItem
+                  key={project.idx}
+                  itemClassName="glass border border-white/20 text-white"
+                >
+                  <div className="flex items-start justify-between ">
+                    <span className="text-[11px] font-semibold uppercase tracking-widest text-violet-300">
+                      Project {project.idx}
                     </span>
-                  ))}
-                </div>
+                    <div className="w-8 h-8 flex items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/70">
+                      <Icon size={15} />
+                    </div>
+                  </div>
 
-                <Link href={`/projects/${project.projectName}`}>
-                  <button className="py-2 px-4 rounded-xl inline-flex items-center gap-1.5 bg-violet-800 hover:bg-violet-600/90 border border-violet-400/40 transition-all duration-200 ease-out cursor-pointer hover:scale-105 my-6 text-sm">
-                    Explore Details <ArrowUpRight className="w-4 h-4" />
-                  </button>
-                </Link>
-              </ScrollStackItem>
-            ))}
+                  <h3 className="text-2xl font-semibold mt-1">{project.title}</h3>
+
+                  <p className="mt-3 text-white/75 text-sm leading-relaxed">
+                    {project.shortDesc || project.desc}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[11px] font-medium px-2.5 py-1 rounded-md border border-white/10 bg-white/5 text-white/65"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <Link href={`/projects/${project.projectName}`}>
+                    <button className="py-2 px-4 rounded-xl inline-flex items-center gap-1.5 bg-violet-800 hover:bg-violet-600/90 border border-violet-400/40 transition-all duration-200 ease-out cursor-pointer hover:scale-105 my-6 text-sm">
+                      Explore Details <ArrowUpRight className="w-4 h-4" />
+                    </button>
+                  </Link>
+                </ScrollStackItem>
+              );
+            })}
           </ScrollStack>
         </div>
       </section>

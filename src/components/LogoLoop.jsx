@@ -359,39 +359,62 @@ export const LogoLoop = memo(
         const itemAriaLabel = isNodeItem
           ? (item.ariaLabel ?? item.title)
           : (item.alt ?? item.title);
+        const tooltipText = item.title || item.alt || item.ariaLabel;
 
         const inner = item.href ? (
           <a
             className={cx(
-              "inline-flex items-center no-underline rounded",
+              "inline-flex items-center no-underline rounded relative",
               "transition-opacity duration-200 ease-linear",
               "hover:opacity-80",
               "focus-visible:outline focus-visible:outline-current focus-visible:outline-offset-2",
             )}
             href={item.href}
             aria-label={itemAriaLabel || "logo link"}
+            title={tooltipText}
             target="_blank"
             rel="noreferrer noopener"
           >
             {content}
           </a>
         ) : (
-          content
+          <div
+            className="relative inline-flex items-center"
+            title={tooltipText}
+            tabIndex={0}
+            aria-label={itemAriaLabel}
+          >
+            {content}
+          </div>
         );
 
         return (
           <li
             className={cx(
-              "flex-none text-[length:var(--logoloop-logoHeight)] leading-[1]",
+              "relative flex-none text-[length:var(--logoloop-logoHeight)] leading-[1]",
               isVertical
                 ? "mb-[var(--logoloop-gap)]"
                 : "mr-[var(--logoloop-gap)]",
-              scaleOnHover && "overflow-visible group/item",
+              "overflow-visible group/item",
             )}
             key={key}
             role="listitem"
           >
             {inner}
+            {tooltipText && (
+              <span
+                role="tooltip"
+                className={cx(
+                  "pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 z-30",
+                  "px-2.5 py-1 rounded-lg bg-neutral-900/95 text-white border border-white/20",
+                  "text-[11px] font-semibold tracking-wide whitespace-nowrap shadow-xl backdrop-blur-md",
+                  "opacity-0 scale-90 group-hover/item:opacity-100 group-hover/item:scale-100 group-focus-within/item:opacity-100 group-focus-within/item:scale-100",
+                  "transition-all duration-200 ease-out",
+                )}
+              >
+                {tooltipText}
+              </span>
+            )}
           </li>
         );
       },
