@@ -88,11 +88,12 @@ const useAnimationLoop = (
     const track = trackRef.current;
     if (!track) return;
 
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mediaQuery =
+      typeof window !== "undefined" && window.matchMedia
+        ? window.matchMedia("(prefers-reduced-motion: reduce)")
+        : null;
 
+    let prefersReduced = mediaQuery ? mediaQuery.matches : false;
     const seqSize = isVertical ? seqHeight : seqWidth;
 
     if (seqSize > 0) {
@@ -103,16 +104,23 @@ const useAnimationLoop = (
       track.style.transform = transformValue;
     }
 
-    if (prefersReduced) {
-      track.style.transform = isVertical
-        ? "translate3d(0, 0, 0)"
-        : "translate3d(0, 0, 0)";
-      return () => {
-        lastTimestampRef.current = null;
-      };
-    }
+    const stopAnimation = () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+      lastTimestampRef.current = null;
+      if (track) {
+        track.style.transform = "translate3d(0, 0, 0)";
+      }
+    };
 
     const animate = (timestamp) => {
+      if (prefersReduced || document.hidden) {
+        rafRef.current = null;
+        return;
+      }
+
       if (lastTimestampRef.current === null) {
         lastTimestampRef.current = timestamp;
       }
@@ -142,7 +150,41 @@ const useAnimationLoop = (
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    rafRef.current = requestAnimationFrame(animate);
+    const startAnimation = () => {
+      if (prefersReduced || document.hidden) return;
+      if (rafRef.current !== null) return;
+      lastTimestampRef.current = null;
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    if (prefersReduced) {
+      stopAnimation();
+    } else {
+      startAnimation();
+    }
+
+    const handleMediaChange = (e) => {
+      prefersReduced = e.matches;
+      if (prefersReduced) {
+        stopAnimation();
+      } else {
+        startAnimation();
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (rafRef.current !== null) {
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = null;
+        }
+      } else if (!prefersReduced) {
+        startAnimation();
+      }
+    };
+
+    mediaQuery?.addEventListener?.("change", handleMediaChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       if (rafRef.current !== null) {
@@ -150,6 +192,8 @@ const useAnimationLoop = (
         rafRef.current = null;
       }
       lastTimestampRef.current = null;
+      mediaQuery?.removeEventListener?.("change", handleMediaChange);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [
     targetVelocity,

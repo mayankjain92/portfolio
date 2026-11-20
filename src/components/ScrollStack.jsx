@@ -1,9 +1,9 @@
-import { useLayoutEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import Lenis from "lenis";
 
 export const ScrollStackItem = ({ children, itemClassName = "" }) => (
   <div
-    className={`scroll-stack-card relative w-full h-80 my-0 p-12 rounded-[40px] shadow-[0_0_30px_rgba(0,0,0,0.1)] box-border origin-top will-change-transform ${itemClassName}`.trim()}
+    className={`scroll-stack-card relative w-full min-h-[22rem] h-auto my-0 mb-6 md:mb-0 p-6 sm:p-8 md:p-12 rounded-[32px] sm:rounded-[40px] shadow-[0_0_30px_rgba(0,0,0,0.1)] box-border origin-top will-change-transform flex flex-col justify-between ${itemClassName}`.trim()}
     style={{
       backfaceVisibility: "hidden",
       transformStyle: "preserve-3d",
@@ -80,6 +80,18 @@ const ScrollStack = ({
   const updateCardTransforms = useCallback(() => {
     if (!cardsRef.current.length || isUpdatingRef.current) return;
 
+    // On mobile screens (< 768px), disable stacking card translation / pinning; render as natural list
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      cardsRef.current.forEach((card) => {
+        if (!card) return;
+        if (card.style.transform) card.style.transform = "";
+        if (card.style.webkitTransform) card.style.webkitTransform = "";
+        if (card.style.filter) card.style.filter = "";
+        if (card.style.willChange !== "auto") card.style.willChange = "auto";
+      });
+      return;
+    }
+
     isUpdatingRef.current = true;
 
     const { scrollTop, containerHeight } = getScrollData();
@@ -103,6 +115,15 @@ const ScrollStack = ({
         : getElementOffset(endElement)
       : 0;
 
+    // Calculate stack unpin point so the last card unpins cleanly before Contact section
+    const numCards = cardsRef.current.length;
+    const lastCard = cardsRef.current[numCards - 1];
+    const lastCardHeight = lastCard?.offsetHeight || 360;
+    const lastCardStackOffset =
+      stackPositionPx + itemStackDistance * (numCards - 1);
+    // Unpin with a safety margin above endElementTop so the card and its button never overlap Contact
+    const stackPinEnd = endElementTop - lastCardStackOffset - lastCardHeight - 80;
+
     cardsRef.current.forEach((card, i) => {
       if (!card) return;
 
@@ -111,8 +132,8 @@ const ScrollStack = ({
         : getElementOffset(card);
       const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
       const triggerEnd = cardTop - scaleEndPositionPx;
-      const pinStart = cardTop - stackPositionPx - itemStackDistance * i;
-      const pinEnd = endElementTop - containerHeight / 2;
+      const pinStart = triggerStart;
+      const pinEnd = Math.max(pinStart, stackPinEnd);
 
       const scaleProgress = calculateProgress(
         scrollTop,
@@ -174,6 +195,7 @@ const ScrollStack = ({
           newTransform.blur > 0 ? `blur(${newTransform.blur}px)` : "";
 
         card.style.transform = transform;
+        card.style.webkitTransform = transform;
         card.style.filter = filter;
 
         lastTransformsRef.current.set(i, newTransform);
@@ -212,6 +234,10 @@ const ScrollStack = ({
   }, [updateCardTransforms]);
 
   const setupLenis = useCallback(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      return null;
+    }
+
     if (useWindowScroll) {
       const lenis = new Lenis({
         duration: 1.2,
@@ -221,8 +247,7 @@ const ScrollStack = ({
         infinite: false,
         wheelMultiplier: 1,
         lerp: 0.1,
-        syncTouch: true,
-        syncTouchLerp: 0.075,
+        syncTouch: false,
       });
 
       lenis.on("scroll", handleScroll);
@@ -237,7 +262,7 @@ const ScrollStack = ({
       return lenis;
     } else {
       const scroller = scrollerRef.current;
-      if (!scroller) return;
+      if (!scroller) return null;
 
       const lenis = new Lenis({
         wrapper: scroller,
@@ -249,8 +274,7 @@ const ScrollStack = ({
         infinite: false,
         wheelMultiplier: 1,
         lerp: 0.1,
-        syncTouch: true,
-        syncTouchLerp: 0.075,
+        syncTouch: false,
       });
 
       lenis.on("scroll", handleScroll);
@@ -266,7 +290,7 @@ const ScrollStack = ({
     }
   }, [handleScroll, useWindowScroll]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
 
@@ -279,29 +303,62 @@ const ScrollStack = ({
     cardsRef.current = cards;
     const transformsCache = lastTransformsRef.current;
 
-    cards.forEach((card, i) => {
-      if (i < cards.length - 1) {
-        card.style.marginBottom = `${itemDistance}px`;
+    const applyLayout = () => {
+      const isMobile = window.innerWidth < 768;
+
+      if (isMobile) {
+        if (lenisRef.current) {
+          lenisRef.current.destroy();
+          lenisRef.current = null;
+        }
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+          animationFrameRef.current = null;
+        }
+        cards.forEach((card) => {
+          card.style.transform = "";
+          card.style.webkitTransform = "";
+          card.style.filter = "";
+          card.style.willChange = "auto";
+          card.style.marginBottom = "";
+        });
+        transformsCache.clear();
+      } else {
+        cards.forEach((card, i) => {
+          if (i < cards.length - 1) {
+            card.style.marginBottom = `${itemDistance}px`;
+          } else {
+            card.style.marginBottom = "0px";
+          }
+          card.style.willChange = "transform, filter";
+          card.style.transformOrigin = "top center";
+          card.style.backfaceVisibility = "hidden";
+          card.style.transform = "translateZ(0)";
+          card.style.webkitTransform = "translateZ(0)";
+          card.style.perspective = "1000px";
+          card.style.webkitPerspective = "1000px";
+        });
+
+        if (!lenisRef.current) {
+          setupLenis();
+        }
+        updateCardTransforms();
       }
-      card.style.willChange = "transform, filter";
-      card.style.transformOrigin = "top center";
-      card.style.backfaceVisibility = "hidden";
-      card.style.transform = "translateZ(0)";
-      card.style.webkitTransform = "translateZ(0)";
-      card.style.perspective = "1000px";
-      card.style.webkitPerspective = "1000px";
-    });
+    };
 
-    setupLenis();
+    applyLayout();
 
-    updateCardTransforms();
+    window.addEventListener("resize", applyLayout, { passive: true });
 
     return () => {
+      window.removeEventListener("resize", applyLayout);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
       }
       if (lenisRef.current) {
         lenisRef.current.destroy();
+        lenisRef.current = null;
       }
       stackCompletedRef.current = false;
       cardsRef.current = [];
@@ -326,14 +383,12 @@ const ScrollStack = ({
   // Container styles based on scroll mode
   const containerStyles = useWindowScroll
     ? {
-        // Global scroll mode - no overflow constraints
         overscrollBehavior: "contain",
         WebkitOverflowScrolling: "touch",
         WebkitTransform: "translateZ(0)",
         transform: "translateZ(0)",
       }
     : {
-        // Container scroll mode - original behavior
         overscrollBehavior: "contain",
         WebkitOverflowScrolling: "touch",
         WebkitTransform: "translateZ(0)",
@@ -351,7 +406,7 @@ const ScrollStack = ({
       ref={scrollerRef}
       style={containerStyles}
     >
-      <div className="scroll-stack-inner pt-0 px-20 pb-[20rem] min-h-screen">
+      <div className="scroll-stack-inner pt-0 px-4 sm:px-8 md:px-16 lg:px-20 pb-12 md:pb-[22rem] min-h-screen">
         {children}
         {/* Spacer so the last pin can release cleanly */}
         <div className="scroll-stack-end w-full h-px" />

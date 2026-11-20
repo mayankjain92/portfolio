@@ -6,7 +6,7 @@ const About = () => {
       <section className="w-full mt-22 relative scroll-mt-24" id="about">
         <div className="py-6">
           <div className="w-full max-w-5xl mx-auto px-4 mb-6">
-            <p className="text-violet-400/60 text-xs uppercase tracking-[0.2em] font-semibold mb-2">
+            <p className="text-violet-300 text-xs uppercase tracking-[0.2em] font-semibold mb-2">
               The person behind the code
             </p>
             <h2 className="text-4xl font-bold">About Me</h2>
@@ -15,7 +15,7 @@ const About = () => {
           <div className="w-full max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Story card */}
             <div className="glass rounded-2xl p-7 border border-white/10 md:col-span-2">
-              <p className="text-xs uppercase tracking-widest text-violet-400/60 font-semibold mb-3">
+              <p className="text-xs uppercase tracking-widest text-violet-300 font-semibold mb-3">
                 My Story
               </p>
               <p className="text-white/70 text-base leading-relaxed">
@@ -24,7 +24,7 @@ const About = () => {
                 down. There&apos;s something about turning a blank screen into
                 something real and functional that just clicks for me. Now
                 pursuing my B.Tech in CSE at{" "}
-                <span className="text-violet-300">JECRC University</span>,
+                <span className="text-violet-300 font-medium">JECRC University</span>,
                 I&apos;m channelling that same energy into building full-stack
                 web applications and landing a role where I can do this every
                 day professionally.
@@ -33,7 +33,7 @@ const About = () => {
 
             {/* Education timeline */}
             <div className="glass rounded-2xl p-7 border border-white/10">
-              <p className="text-xs uppercase tracking-widest text-violet-400/60 font-semibold mb-5">
+              <p className="text-xs uppercase tracking-widest text-violet-300 font-semibold mb-5">
                 Education
               </p>
               <div className="space-y-5">
@@ -61,7 +61,7 @@ const About = () => {
                       <span className="w-px flex-1 bg-white/8 min-h-[20px]" />
                     </div>
                     <div>
-                      <p className="text-[11px] text-white/60 font-medium mb-0.5">
+                      <p className="text-[11px] text-white/70 font-medium mb-0.5">
                         {item.year}
                       </p>
                       <p
@@ -69,7 +69,7 @@ const About = () => {
                       >
                         {item.title}
                       </p>
-                      <p className="text-xs text-white/60 mt-0.5">
+                      <p className="text-xs text-white/70 mt-0.5">
                         {item.place}
                       </p>
                     </div>
@@ -80,7 +80,7 @@ const About = () => {
 
             {/* Currently learning */}
             <div className="glass rounded-2xl p-7 border border-white/10">
-              <p className="text-xs uppercase tracking-widest text-emerald-400/60 font-semibold mb-5">
+              <p className="text-xs uppercase tracking-widest text-emerald-300 font-semibold mb-5">
                 Currently Learning
               </p>
               <div className="space-y-3">
@@ -101,10 +101,10 @@ const About = () => {
                       className={`w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 ${item.color} animate-pulse`}
                     />
                     <div>
-                      <p className="text-sm font-semibold text-white/80">
+                      <p className="text-sm font-semibold text-white/90">
                         {item.label}
                       </p>
-                      <p className="text-xs text-white/60 mt-0.5">{item.sub}</p>
+                      <p className="text-xs text-white/70 mt-0.5">{item.sub}</p>
                     </div>
                   </div>
                 ))}
@@ -113,10 +113,10 @@ const About = () => {
 
             {/* Hobbies */}
             <div className="glass rounded-2xl p-7 border border-white/10 md:col-span-2">
-              <p className="text-xs uppercase tracking-widest text-cyan-400/60 font-semibold mb-5">
+              <p className="text-xs uppercase tracking-widest text-cyan-300 font-semibold mb-5">
                 Outside of Code
               </p>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[
                   {
                     emoji: "🎵",
@@ -139,10 +139,10 @@ const About = () => {
                     className="rounded-xl border border-white/8 bg-white/[0.03] p-4 hover:border-violet-400/30 hover:bg-violet-500/5 transition-all duration-200"
                   >
                     <span className="text-2xl">{hobby.emoji}</span>
-                    <p className="text-sm font-semibold text-white/80 mt-2">
+                    <p className="text-sm font-semibold text-white/90 mt-2">
                       {hobby.label}
                     </p>
-                    <p className="text-xs text-white/65 mt-1 leading-relaxed">
+                    <p className="text-xs text-white/70 mt-1 leading-relaxed">
                       {hobby.desc}
                     </p>
                   </div>

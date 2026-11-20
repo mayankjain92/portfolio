@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef } from "react";
 
 const FuzzyText = ({
@@ -13,7 +14,7 @@ const FuzzyText = ({
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    let animationFrameId;
+    let animationFrameId = null;
     let isCancelled = false;
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -34,16 +35,15 @@ const FuzzyText = ({
 
       const fontSizeStr =
         typeof fontSize === "number" ? `${fontSize}px` : fontSize;
-      let numericFontSize;
+
+      let numericFontSize = 24;
       if (typeof fontSize === "number") {
         numericFontSize = fontSize;
+      } else if (typeof fontSize === "string" && /^\d+(\.\d+)?px$/.test(fontSize)) {
+        numericFontSize = parseFloat(fontSize);
       } else {
-        const temp = document.createElement("span");
-        temp.style.fontSize = fontSize;
-        document.body.appendChild(temp);
-        const computedSize = window.getComputedStyle(temp).fontSize;
-        numericFontSize = parseFloat(computedSize);
-        document.body.removeChild(temp);
+        canvas.style.fontSize = fontSizeStr;
+        numericFontSize = parseFloat(window.getComputedStyle(canvas).fontSize) || 24;
       }
 
       const text = React.Children.toArray(children).join("");
@@ -91,7 +91,10 @@ const FuzzyText = ({
       let isHovering = false;
       const fuzzRange = 30;
 
-      const run = () => {
+      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let prefersReducedMotion = mediaQuery.matches;
+
+      const renderFrame = () => {
         if (isCancelled) return;
         ctx.clearRect(
           -fuzzRange,
@@ -99,6 +102,12 @@ const FuzzyText = ({
           offscreenWidth + 2 * fuzzRange,
           tightHeight + 2 * fuzzRange
         );
+
+        if (prefersReducedMotion) {
+          ctx.drawImage(offscreen, 0, 0);
+          return;
+        }
+
         const intensity = isHovering ? hoverIntensity : baseIntensity;
         for (let j = 0; j < tightHeight; j++) {
           const dx = Math.floor(intensity * (Math.random() - 0.5) * fuzzRange);
@@ -114,10 +123,56 @@ const FuzzyText = ({
             1
           );
         }
-        animationFrameId = window.requestAnimationFrame(run);
       };
 
-      run();
+      const loop = () => {
+        if (isCancelled) return;
+        renderFrame();
+        animationFrameId = window.requestAnimationFrame(loop);
+      };
+
+      const startLoop = () => {
+        if (isCancelled || animationFrameId) return;
+        if (document.hidden || prefersReducedMotion) {
+          renderFrame();
+          return;
+        }
+        animationFrameId = window.requestAnimationFrame(loop);
+      };
+
+      const stopLoop = () => {
+        if (animationFrameId) {
+          window.cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+        }
+      };
+
+      const handleVisibilityChange = () => {
+        if (document.hidden || prefersReducedMotion) {
+          stopLoop();
+        } else {
+          startLoop();
+        }
+      };
+
+      const handleMotionChange = (e) => {
+        prefersReducedMotion = e.matches;
+        if (prefersReducedMotion || document.hidden) {
+          stopLoop();
+          renderFrame();
+        } else {
+          startLoop();
+        }
+      };
+
+      document.addEventListener("visibilitychange", handleVisibilityChange);
+      if (mediaQuery?.addEventListener) {
+        mediaQuery.addEventListener("change", handleMotionChange);
+      } else if (mediaQuery?.addListener) {
+        mediaQuery.addListener(handleMotionChange);
+      }
+
+      startLoop();
 
       const isInsideTextArea = (x, y) => {
         return (
@@ -129,7 +184,7 @@ const FuzzyText = ({
       };
 
       const handleMouseMove = (e) => {
-        if (!enableHover) return;
+        if (!enableHover || prefersReducedMotion) return;
         const rect = canvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -141,8 +196,7 @@ const FuzzyText = ({
       };
 
       const handleTouchMove = (e) => {
-        if (!enableHover) return;
-        e.preventDefault();
+        if (!enableHover || prefersReducedMotion || !e.touches[0]) return;
         const rect = canvas.getBoundingClientRect();
         const touch = e.touches[0];
         const x = touch.clientX - rect.left;
@@ -157,14 +211,18 @@ const FuzzyText = ({
       if (enableHover) {
         canvas.addEventListener("mousemove", handleMouseMove);
         canvas.addEventListener("mouseleave", handleMouseLeave);
-        canvas.addEventListener("touchmove", handleTouchMove, {
-          passive: false,
-        });
+        canvas.addEventListener("touchmove", handleTouchMove, { passive: true });
         canvas.addEventListener("touchend", handleTouchEnd);
       }
 
       const cleanup = () => {
-        window.cancelAnimationFrame(animationFrameId);
+        stopLoop();
+        document.removeEventListener("visibilitychange", handleVisibilityChange);
+        if (mediaQuery?.removeEventListener) {
+          mediaQuery.removeEventListener("change", handleMotionChange);
+        } else if (mediaQuery?.removeListener) {
+          mediaQuery.removeListener(handleMotionChange);
+        }
         if (enableHover) {
           canvas.removeEventListener("mousemove", handleMouseMove);
           canvas.removeEventListener("mouseleave", handleMouseLeave);
@@ -180,7 +238,9 @@ const FuzzyText = ({
 
     return () => {
       isCancelled = true;
-      window.cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) {
+        window.cancelAnimationFrame(animationFrameId);
+      }
       if (canvas && canvas.cleanupFuzzyText) {
         canvas.cleanupFuzzyText();
       }
@@ -196,7 +256,12 @@ const FuzzyText = ({
     hoverIntensity,
   ]);
 
-  return <canvas ref={canvasRef} />;
+  return (
+    <span className="relative inline-flex items-center">
+      <canvas ref={canvasRef} aria-hidden="true" className="block" />
+      <span className="sr-only">{children}</span>
+    </span>
+  );
 };
 
 export default FuzzyText;

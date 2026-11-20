@@ -49,7 +49,7 @@ const Skills = () => {
             What I bring to the table
           </p>
           <h2 className="text-4xl font-bold">Technical Expertise</h2>
-          <p className="text-white/65 mt-2 text-sm">
+          <p className="text-white/70 mt-2 text-sm">
             Technologies, frameworks, and architecture tools I actively build with.
           </p>
         </div>
@@ -72,7 +72,7 @@ const Skills = () => {
 
             {/* Programming Languages */}
             <div className="mt-10">
-              <p className="text-xs uppercase tracking-widest text-amber-400/70 font-semibold mb-4">
+              <p className="text-xs uppercase tracking-widest text-amber-300 font-semibold mb-4">
                 Programming Languages
               </p>
 
@@ -86,7 +86,7 @@ const Skills = () => {
                 ].map((lang) => (
                   <span
                     key={lang}
-                    className="text-xs md:text-sm font-medium px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-400/25 text-amber-200/90 hover:text-white hover:border-amber-400/50 transition-all duration-200"
+                    className="text-xs md:text-sm font-medium px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-400/25 text-amber-200 hover:text-white hover:border-amber-400/50 transition-all duration-200"
                   >
                     {lang}
                   </span>
@@ -161,7 +161,7 @@ const Skills = () => {
                       {cat.items.map((skill) => (
                         <span
                           key={skill}
-                          className="text-xs px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/80 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all duration-150"
+                          className="text-xs px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/90 hover:text-white hover:border-white/30 hover:bg-white/10 transition-all duration-150"
                         >
                           {skill}
                         </span>
@@ -174,7 +174,7 @@ const Skills = () => {
 
             {/* Footer Status Bar */}
             <div className="mt-12 pt-6 border-t border-white/[0.06] flex items-center justify-between flex-wrap gap-4">
-              <p className="text-xs text-white/60 font-medium tracking-wide">
+              <p className="text-xs text-white/70 font-medium tracking-wide">
                 Always learning · Always building high-performance software
               </p>
 

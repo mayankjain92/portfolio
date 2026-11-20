@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import GlassSocialIcons from "../components/GlassSocialIcons";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaXTwitter, FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa6";
@@ -17,7 +18,7 @@ const Page = () => {
       className="relative min-h-screen w-full text-white px-4 pb-24"
       id="home"
     >
-      <div className="w-full max-w-5xl mx-auto pt-20 md:pt-24 space-y-8">
+      <div className="w-full max-w-5xl mx-auto pt-6 md:pt-10 space-y-8">
         {/* ── Hero Headline ── */}
         <div className="flex flex-col items-center text-center gap-5">
           <div className="inline-flex items-center gap-2 glass px-4 py-1.5 rounded-full text-xs md:text-sm font-medium tracking-wide text-white/80 border border-white/15">
@@ -58,7 +59,7 @@ const Page = () => {
                 color: "#1DA1F2",
               },
               {
-                href: "https://instagram.com/username",
+                href: "https://instagram.com/mayyyankjain",
                 label: "Instagram",
                 Icon: FaInstagram,
                 color: "#E1306C",
@@ -92,13 +93,13 @@ const Page = () => {
             </p>
 
             <div className="flex flex-wrap items-center gap-4 mt-6">
-              <a
-                className="inline-flex items-center gap-1 text-violet-300 hover:text-white transition-colors text-sm font-semibold group"
+              <Link
+                className="inline-flex items-center gap-1 text-violet-300 hover:text-white transition-colors text-sm font-semibold group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 rounded"
                 href="/#about"
               >
                 <span>Learn more about my background</span>
                 <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
+              </Link>
             </div>
 
             <div className="flex flex-wrap mt-8 gap-3">
@@ -106,14 +107,14 @@ const Page = () => {
                 href="https://drive.google.com/file/d/16q_ZD8_A1tkqAAAp_-qfSVAK4FAnEU_U/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="py-2.5 px-5 font-bold rounded-xl inline-flex items-center gap-2 bg-violet-700 hover:bg-violet-600 border border-violet-400/40 text-white shadow-lg shadow-violet-900/30 transition-all duration-200 cursor-pointer hover:scale-105 text-sm"
+                className="py-2.5 px-5 font-bold rounded-xl inline-flex items-center justify-center min-h-[44px] gap-2 bg-violet-700 hover:bg-violet-600 border border-violet-400/40 text-white shadow-lg shadow-violet-900/30 transition-all duration-200 cursor-pointer hover:scale-105 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
               >
                 View Resume
               </a>
 
               <a
                 href="mailto:mayankjain96725@gmail.com"
-                className="glass py-2.5 px-5 font-semibold rounded-xl inline-flex items-center gap-2 text-sm bg-white/5 border border-white/15 hover:border-violet-400/50 hover:bg-violet-500/10 cursor-pointer transition-all duration-200 hover:scale-105 text-white/90"
+                className="glass py-2.5 px-5 font-semibold rounded-xl inline-flex items-center justify-center min-h-[44px] gap-2 text-sm bg-white/5 border border-white/15 hover:border-violet-400/50 hover:bg-violet-500/10 cursor-pointer transition-all duration-200 hover:scale-105 text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400"
               >
                 <MdOutlineEmail className="w-4 h-4 text-violet-300" />
                 <span>Send Email</span>
@@ -125,8 +126,9 @@ const Page = () => {
             <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-violet-600 to-indigo-600 opacity-30 group-hover:opacity-60 blur transition duration-300 -z-10" />
             <img
               src="/Images/IMG_20260124_224848.jpg.jpeg"
-              alt="Mayank Jain"
+              alt="Mayank Jain — Full Stack Developer"
               className="w-full aspect-[3/4] object-cover rounded-2xl border border-white/20 shadow-xl"
+              loading="eager"
             />
           </div>
         </div>
@@ -170,7 +172,7 @@ const Page = () => {
                 <p className="text-base md:text-lg font-bold text-white leading-tight">
                   {item.num}
                 </p>
-                <p className="text-xs text-white/50 font-medium mt-0.5">
+                <p className="text-xs text-white/70 font-medium mt-0.5">
                   {item.label}
                 </p>
               </div>

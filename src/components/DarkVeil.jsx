@@ -1,3 +1,4 @@
+"use client";
 import { useRef, useEffect } from "react";
 import { Renderer, Program, Mesh, Triangle, Vec2 } from "ogl";
 
@@ -83,9 +84,10 @@ export default function DarkVeil({
   resolutionScale = 1,
 }) {
   const ref = useRef(null);
+
   useEffect(() => {
     const canvas = ref.current;
-    const parent = canvas.parentElement;
+    if (!canvas) return;
 
     const renderer = new Renderer({
       dpr: Math.min(window.devicePixelRatio, 2),
@@ -111,43 +113,99 @@ export default function DarkVeil({
 
     const mesh = new Mesh(gl, { geometry, program });
 
-    // const resize = () => {
-    //   const w = parent.clientWidth,
-    //     h = parent.clientHeight;
-    //   renderer.setSize(w * resolutionScale, h * resolutionScale);
-    //   program.uniforms.uResolution.value.set(w, h);
-    // };
-
     const resize = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
       renderer.setSize(w * resolutionScale, h * resolutionScale);
       program.uniforms.uResolution.value.set(w, h);
+      render(performance.now() - start);
     };
 
     window.addEventListener("resize", resize);
-    resize();
 
     const start = performance.now();
-    let frame = 0;
+    let frameId = null;
 
-    const loop = () => {
-      program.uniforms.uTime.value =
-        ((performance.now() - start) / 1000) * speed;
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let prefersReducedMotion = mediaQuery.matches;
+
+    const render = (timeElapsed) => {
+      program.uniforms.uTime.value = (timeElapsed / 1000) * speed;
       program.uniforms.uHueShift.value = hueShift;
       program.uniforms.uNoise.value = noiseIntensity;
       program.uniforms.uScan.value = scanlineIntensity;
       program.uniforms.uScanFreq.value = scanlineFrequency;
       program.uniforms.uWarp.value = warpAmount;
       renderer.render({ scene: mesh });
-      frame = requestAnimationFrame(loop);
     };
 
-    loop();
+    const loop = (timestamp) => {
+      render(timestamp - start);
+      frameId = requestAnimationFrame(loop);
+    };
+
+    const startLoop = () => {
+      if (frameId) return;
+      if (document.hidden || prefersReducedMotion) {
+        render(performance.now() - start);
+        return;
+      }
+      frameId = requestAnimationFrame(loop);
+    };
+
+    const stopLoop = () => {
+      if (frameId) {
+        cancelAnimationFrame(frameId);
+        frameId = null;
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden || prefersReducedMotion) {
+        stopLoop();
+      } else {
+        startLoop();
+      }
+    };
+
+    const handleMotionChange = (e) => {
+      prefersReducedMotion = e.matches;
+      if (prefersReducedMotion || document.hidden) {
+        stopLoop();
+        render(performance.now() - start);
+      } else {
+        startLoop();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    if (mediaQuery?.addEventListener) {
+      mediaQuery.addEventListener("change", handleMotionChange);
+    } else if (mediaQuery?.addListener) {
+      mediaQuery.addListener(handleMotionChange);
+    }
+
+    // Initial resize and start
+    resize();
+    startLoop();
 
     return () => {
-      cancelAnimationFrame(frame);
+      stopLoop();
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      if (mediaQuery?.removeEventListener) {
+        mediaQuery.removeEventListener("change", handleMotionChange);
+      } else if (mediaQuery?.removeListener) {
+        mediaQuery.removeListener(handleMotionChange);
+      }
+
+      // Dispose WebGL resources
+      geometry.remove();
+      program.remove();
+      const loseContextExt = gl.getExtension("WEBGL_lose_context");
+      if (loseContextExt) {
+        loseContextExt.loseContext();
+      }
     };
   }, [
     hueShift,
@@ -158,16 +216,12 @@ export default function DarkVeil({
     warpAmount,
     resolutionScale,
   ]);
+
   return (
     <canvas
       ref={ref}
-      className="fixed top-0 left-0 w-full h-screen -z-10 block"
+      aria-hidden="true"
+      className="fixed inset-0 w-full h-dvh -z-10 block pointer-events-none"
     />
   );
-  // return (
-  //   <canvas
-  //     ref={ref}
-  //     className="fixed top-0 left-0 w-full h-screen -z-10 block"
-  //   />
-  // );
 }

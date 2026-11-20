@@ -41,7 +41,8 @@ For core CS subjects (OS, DBMS, Computer Networks, OOP), Prep OS utilizes MongoD
     screenshots: [
       "/Images/PrepOsDashboard.png",
       "/Images/PrepOsDSA.png",
-      "/Images/PrepOsCSTheory.png",],
+      "/Images/PrepOsCSTheory.png",
+    ],
 
     learned: `Building Prep OS deepened my expertise in scalable full-stack monorepo architecture using pnpm workspaces and shared schema packages (@prep-os/shared). Implementing the Redis Cache-Aside pattern for LeetCode sync taught me how to handle external API rate limits, cache invalidation, and graceful fallback strategies. Optimizing CS theory progress reporting using MongoDB aggregation pipelines significantly improved database query speeds and simplified state management across the dashboard.`,
   },
@@ -97,6 +98,46 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
 
   {
     idx: "03",
+    projectName: "mailiac",
+    title: "Mailiac",
+    shortDesc:
+      "Enterprise-grade AI email forensics & automated threat hunting platform engineered to expose BEC, spear phishing, and spoofing.",
+
+    longDesc:
+      "Mailiac is an asynchronous, high-throughput email forensics platform engineered to expose Business Email Compromise (BEC), spear phishing, lookalike domain spoofing, punycode/homoglyph attacks, and zero-width obfuscation. Operates on a Deterministic 4-Pillar Corroboration Architecture (Identity 35%, AI Intent 35%, Crypto Auth 20%, Infrastructure 10%), anchored by cryptographic verification (SPF/DKIM/DMARC/Multi-Hop ARC), reverse-hop network boundary tracing, and zero-downtime deterministic heuristic fallbacks.",
+
+    features: [
+      "Deterministic 4-Pillar Corroboration Architecture",
+      "Cryptographic authentication verification (SPF, DKIM, DMARC, ARC)",
+      "Reverse-hop network received header boundary tracing",
+      "Semantic AI intent intelligence with Google Gemini failover routing",
+      "Lookalike domain spoof & homoglyph detector",
+      "Asynchronous BullMQ worker pipeline with Redis backing",
+      "Zero-dependency forensic PDF dossier generator",
+    ],
+
+    tags: [
+      "Next.js 14",
+      "TypeScript",
+      "Express.js",
+      "BullMQ",
+      "Redis",
+      "MongoDB",
+      "Gemini AI",
+      "Docker",
+      "Turborepo",
+    ],
+
+    liveUrl: "https://mailiac-web.vercel.app",
+    githubUrl: "https://github.com/mayankjain92/mailiac.git",
+    screenshots: [],
+
+    learned:
+      "Engineered high-throughput asynchronous email forensic pipelines with BullMQ and Redis, implemented RFC 822 MIME parsing, cryptographic verification for SPF/DKIM/DMARC/ARC, and resilient multi-model LLM failover routing with strict heuristic fallbacks.",
+  },
+
+  {
+    idx: "04",
     projectName: "realtime-chat",
     title: "Real-Time Chat Application",
     shortDesc:
@@ -126,38 +167,44 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
   },
 
   {
-    idx: "04",
-    projectName: "notesapp-web",
-    title: "NotesApp",
+    idx: "05",
+    projectName: "spotify-dynamic-island",
+    title: "Spotify Dynamic Island",
     shortDesc:
-      "A full-stack notes management app built with Next.js and MongoDB.",
+      "Apple-inspired Dynamic Island pill and expanded media controller for Spotify and universal MPRIS players in GNOME Shell.",
 
     longDesc:
-      "A full-stack CRUD Notes application built using Next.js (App Router), MongoDB, and Tailwind CSS. The application enables users to create, read, update, and delete notes through RESTful APIs with proper validation and error handling. It features a responsive UI, efficient state management using React hooks, and seamless client-server communication via Axios. Designed with a scalable structure to support future enhancements like authentication and advanced features.",
+      "An Apple-inspired Dynamic Island pill and expanded media controller for Spotify and universal MPRIS players in GNOME Shell (45, 46, 47) built with GJS and Libadwaita. Features sound-reactive equalizer animations, album art vignette background, Samsung OneUI sound-reactive waveform scrubber, synchronized scrolling lyrics via lrclib.net with click-to-seek, and universal MPRIS player fallback.",
 
     features: [
-      "Create, read, update, and delete (CRUD) notes",
-      "RESTful API architecture with proper validation",
-      "MongoDB integration using Mongoose",
-      "Dynamic data fetching with Axios",
-      "Responsive UI built with Tailwind CSS",
-      "Edit and update functionality with state-driven UI",
-      "Clean and modular project structure",
+      "Dynamic Island Top Bar Pill with audio visualizer",
+      "Album art vignette with vertical gradient fading",
+      "Sound-reactive undulating waveform scrubber",
+      "Synchronized live scrolling lyrics with click-to-seek",
+      "Universal MPRIS player fallback support",
+      "Native Libadwaita preferences window",
     ],
 
-    tags: ["Next.js", "MongoDB", "Tailwind CSS", "Axios", "REST API"],
+    tags: [
+      "JavaScript",
+      "GNOME Shell",
+      "GJS",
+      "Libadwaita",
+      "CSS",
+      "MPRIS",
+      "Linux",
+    ],
 
     liveUrl: "",
-    githubUrl: "https://github.com/mayankjain92/notesapp.git",
-
+    githubUrl: "https://github.com/mayankjain92/spotify-dynamic-island.git",
     screenshots: [],
 
     learned:
-      "Strengthened my understanding of full-stack development, REST API design, database integration with MongoDB, state management in React, and building scalable applications using Next.js App Router.",
+      "Mastered Linux desktop integration with GNOME Shell GJS and DBus/MPRIS interfaces, developed custom Clutter/St UI components, and integrated real-time audio visualization with live lyric synchronization.",
   },
 
   {
-    idx: "05",
+    idx: "06",
     projectName: "portfolio-website",
     title: "Portfolio Website",
     shortDesc: "A modern, animated developer portfolio built with Next.js.",
@@ -184,35 +231,4 @@ Integrating Google Gemini for AI-powered suggestions was also new territory — 
     learned:
       "Improved my understanding of modern React architecture, UI design systems, animation integration, routing patterns, and building scalable frontend applications ready for deployment.",
   },
-
-  {
-    idx: "06",
-    projectName: "recipe-app",
-    title: "Recipe App",
-    shortDesc:
-      "Android app that fetches and displays recipes from an online API.",
-
-    longDesc:
-      "A modern Android application built using Kotlin and Jetpack Compose that fetches real-time recipe data from an online REST API. Users can browse, search, and view detailed recipes including ingredients and preparation steps. The app is fully internet-based and designed with a clean, responsive UI following modern Android development practices.",
-
-    features: [
-      "Real-time recipe data fetching via REST API",
-      "Search functionality for finding recipes instantly",
-      "Ingredient list and step-by-step cooking instructions",
-      "State-driven UI built with Jetpack Compose",
-      "Internet-based dynamic content rendering",
-      "Modern Android UI design principles",
-      "Optimized user experience with responsive layouts",
-    ],
-
-    tags: ["Kotlin", "Jetpack Compose", "Android Studio", "REST API"],
-
-    liveUrl: "",
-    githubUrl: "",
-    screenshots: [],
-
-    learned:
-      "Learned API integration, asynchronous network handling, Compose state management, and structuring a modern Android application using Kotlin best practices.",
-  },
 ];
-
